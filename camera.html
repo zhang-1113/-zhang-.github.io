@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAIRO 凯罗 | 专业相机与影像配件官方网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 导航栏 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: #3498db;
+            margin-left: 5px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        .nav-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+        /* Hero区 */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?q=80') center/cover no-repeat;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        /* 品牌故事 */
+        .brand-story {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #2c3e50;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: #3498db;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .story-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .story-img {
+            flex: 1;
+        }
+        .story-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .story-text {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        /* 产品中心 */
+        .products {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .category-btn {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            padding: 5px 10px;
+            position: relative;
+        }
+        .category-btn.active::after {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background-color: #3498db;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        .product-info {
+            padding: 25px;
+        }
+        .product-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .product-info p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        /* 场景展示 */
+        .scenes {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .scene-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 400px;
+        }
+        .scene-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .scene-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
+        }
+        .scene-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        /* 购买渠道 */
+        .purchase {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        .purchase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            text-align: center;
+        }
+        .purchase-card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .purchase-icon {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        .purchase-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .purchase-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        /* 客户服务 */
+        .service {
+            padding: 100px 0;
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        .service-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .service-text {
+            max-width: 600px;
+        }
+        .service-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .service-text p {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        .service-contact {
+            text-align: right;
+        }
+        .service-contact h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .service-contact p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+        /* 页脚 */
+        footer {
+            background-color: #1a2a3a;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .footer-logo span {
+            color: #3498db;
+            margin-left: 5px;
+        }
+        .footer-about p {
+            max-width: 300px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-links h3::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #3498db;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #fff;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        .footer-contact h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-contact h3::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #3498db;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .footer-contact p {
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        .footer-bottom {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 14px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        /* 响应式 */
+        @media (max-width: 1200px) {
+            .container {
+                width: 90%;
+            }
+            .product-grid, .scene-grid, .purchase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .story-content, .service-content, .footer-top {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            .product-grid, .scene-grid, .purchase-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .service-contact {
+                text-align: center;
+            }
+        }
+    </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">KAIRO<span>凯罗</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#story">品牌故事</a></li>
+                    <li><a href="#products">产品中心</a></li>
+                    <li><a href="#scenes">场景展示</a></li>
+                    <li><a href="#purchase">购买渠道</a></li>
+                    <li><a href="#service">客户服务</a></li>
+                </ul>
+                <button class="nav-btn">立即购买</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero区 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>KAIRO 凯罗<br>定格光影，唤醒感知</h1>
+                <p>专业相机与影像配件，为每一位创作者而生，让每一次按下快门都成为艺术。</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-primary">探索相机系列</a>
+                    <a href="#products" class="btn btn-secondary">定制影像套装</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌故事 -->
+    <section class="brand-story" id="story">
+        <div class="container">
+            <h2 class="section-title">品牌故事</h2>
+            <div class="story-content">
+                <div class="story-img">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80" alt="KAIRO品牌理念">
+                </div>
+                <div class="story-text">
+                    <p>KAIRO 凯罗源于对光影艺术的极致追求，以"让创作更纯粹"为核心理念，融合精密工艺与创新科技，为摄影爱好者与专业创作者打造兼具性能与美学的影像工具。</p>
+                    <p>从机身到配件，每一处细节都承载着对影像的敬畏，让每一次按下快门，都成为与世界的深情对话。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品中心 -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">产品中心</h2>
+            <div class="product-categories">
+                <button class="category-btn active">全部产品</button>
+                <button class="category-btn">相机机身</button>
+                <button class="category-btn">镜头</button>
+                <button class="category-btn">配件</button>
+            </div>
+            <div class="product-grid">
+                <!-- 相机机身：Kairo A1微单 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources\picture\Kairo A1微单相机.jpg" alt="Kairo A1微单相机">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo A1微单相机</h3>
+                        <p>轻量化全画幅机身，2410万像素传感器，5轴防抖+4K 60fps视频录制，兼顾便携与专业性能。</p>
+                        <div class="product-price">¥12,999 起</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+                <!-- 镜头：Kairo 50mm f1.4定焦 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources\picture\微信图片_20251110104034_39_69.jpg" alt="Kairo 50mm f1.4定焦镜头">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo 50mm F1.4 定焦镜头</h3>
+                        <p>大光圈虚化效果自然，金属镜身+细腻对焦环，适配全画幅机身，人像/人文摄影利器。</p>
+                        <div class="product-price">¥3,199</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+                <!-- 配件：Kairo Pro摄影双肩包 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources\picture\Kairo Pro摄影双肩包.jpg" alt="Kairo Pro摄影双肩包">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo Pro摄影双肩包</h3>
+                        <p>高密度防水帆布材质，分层式内部结构，可收纳机身+3支镜头+配件，人体工学肩带减负设计。</p>
+                        <div class="product-price">¥899</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+                <!-- 相机机身：Kairo A1（黑色款） -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources\picture\Kairo A1微单相机（黑色款）.jpg" alt="Kairo A1微单相机（黑色款）">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo A1微单相机（黑色款）</h3>
+                        <p>皮革纹理机身，15fps高速连拍+眼部对焦追踪，支持Wi-Fi/蓝牙实时传输，专业创作首选。</p>
+                        <div class="product-price">¥13,499</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+                <!-- 镜头：Kairo 50mm f1.4（细节款） -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources\picture\微信图片_20251110104041_46_69.jpg" alt="Kairo 50mm f1.4镜头细节">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo 50mm F1.4 定焦镜头</h3>
+                        <p>超低色散镜片抑制色差，最近对焦距离0.45m，兼顾微距拍摄，金属质感操作手感舒适。</p>
+                        <div class="product-price">¥3,199</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+                <!-- 配件：Kairo Pro摄影包（内部展示） -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="resources/picture/Kairo Pro摄影包内部.jpg" alt="Kairo Pro摄影包内部">
+                    </div>
+                    <div class="product-info">
+                        <h3>Kairo Pro摄影双肩包（专业款）</h3>
+                        <p>可调节分区内胆，适配多机型收纳，侧边快取口袋+底部三脚架固定带，户外拍摄更便捷。</p>
+                        <div class="product-price">¥999</div>
+                        <a href="#" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 场景展示 -->
+    <section class="scenes" id="scenes">
+        <div class="container">
+            <h2 class="section-title">场景展示</h2>
+            <div class="scene-grid">
+                <div class="scene-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80" alt="专业创作场景">
+                    <div class="scene-overlay">
+                        <h3>专业创作</h3>
+                        <p>Kairo A1搭配长焦镜头，捕捉体育赛事动态瞬间，对焦精准清晰。</p>
+                    </div>
+                </div>
+                <div class="scene-card">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80" alt="日常记录场景">
+                    <div class="scene-overlay">
+                        <h3>日常记录</h3>
+                        <p>50mm定焦镜头的街头人文摄影，色彩还原真实，氛围自然细腻。</p>
+                    </div>
+                </div>
+                <div class="scene-card">
+                    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80" alt="户外探险场景">
+                    <div class="scene-overlay">
+                        <h3>户外探险</h3>
+                        <p>防水摄影包+耐用机身，轻松应对雪山、沙漠等复杂拍摄环境。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 购买渠道 -->
+    <section class="purchase" id="purchase">
+        <div class="container">
+            <h2 class="section-title">购买渠道</h2>
+            <div class="purchase-grid">
+                <div class="purchase-card">
+                    <div class="purchase-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>官方商城</h3>
+                    <p>点击直达官方商城，享新品首发、专属优惠及定制服务。</p>
+                    <a href="#" class="btn btn-primary">立即前往</a>
+                </div>
+                <div class="purchase-card">
+                    <div class="purchase-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>线下体验店</h3>
+                    <p>全国20+城市体验店，现场体验产品性能，专业顾问一对一服务。</p>
+                    <a href="#" class="btn btn-primary">查询地址</a>
+                </div>
+                <div class="purchase-card">
+                    <div class="purchase-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>授权经销商</h3>
+                    <p>京东/天猫官方旗舰店同步发售，正品保障+全国联保。</p>
+                    <a href="#" class="btn btn-primary">查看店铺</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户服务 -->
+    <section class="service" id="service">
+        <div class="container">
+            <div class="service-content">
+                <div class="service-text">
+                    <h2>专业服务，全程陪伴</h2>
+                    <p>提供两年官方质保、全国联保服务，专业技术团队在线解答操作疑问，教程中心涵盖从入门到进阶的摄影技巧。</p>
+                    <a href="#" class="btn btn-secondary">进入教程中心</a>
+                </div>
+                <div class="service-contact">
+                    <h3>联系我们</h3>
+                    <p>400-888-KAIRO</p>
+                    <p>工作日 9:00-18:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <div class="footer-logo">KAIRO<span>凯罗</span></div>
+                    <p>定格光影，唤醒感知。专业相机与影像配件品牌，为创作者而生。</p>
+                </div>
+                <div class="footer-links">
+                    <h3>产品中心</h3>
+                    <ul>
+                        <li><a href="#">相机机身</a></li>
+                        <li><a href="#">镜头系列</a></li>
+                        <li><a href="#">配件周边</a></li>
+                        <li><a href="#">影像套装</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="#">品牌故事</a></li>
+                        <li><a href="#">线下体验店</a></li>
+                        <li><a href="#">招聘信息</a></li>
+                        <li><a href="#">媒体中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>联系客服</h3>
+                    <p>400-888-KAIRO</p>
+                    <p>service@kairo-camera.com</p>
+                    <p>北京市朝阳区影像创意园A座</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 KAIRO 凯罗 版权所有 | 隐私政策 | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 添加JavaScript -->
+    <script>
+        // 产品分类切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // 为当前点击的按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 这里可以添加过滤产品的逻辑
+                    // 由于没有真实的产品数据，这里只做UI切换
+                });
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
